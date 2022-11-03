@@ -1,75 +1,31 @@
 import "./App.css";
-import { nanoid } from "nanoid";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import React, { Component } from "react";
-import {AppContainer, H1,  H2} from "App.styled";
 
-import Phonebook from "components/Phonebook/Phonebook";
-import SearchInput from "components/SearchInput/SearchInput";
-import ContactList from "components/ContactList/ContactList";
+import SearchBar from "components/SearchBar/SearchBar";
+import ImageGallery from "components/ImageGallery/ImageGallery";
 
 export default class App extends Component {
-  state = {
-    contacts: [
-      { id: "id-1", img:"", name: "Rosie Simpson", phoneNumber: "459-12-56" },
-      { id: "id-2", img:"", name: "Hermione Kline", phoneNumber: "443-89-12" },
-      { id: "id-3", img:"", name: "Eden Clements", phoneNumber: "645-17-79" },
-      { id: "id-4", img:"", name: "Annie Copeland", phoneNumber: "227-91-26" },
-    ],
-    filter: "",
-  };
-  formSubmitHandler = ({img, name, phoneNumber }) => {
-    const contact = {
-      id: nanoid(),
-      name,
-      phoneNumber,
-      img,
-    };
-    
-    const findContact = this.state.contacts.find((contact) =>
-      contact.name.toLowerCase().includes(name.toLowerCase())
-    );
+  state = { inputValue: "" };
 
-    findContact
-      ? alert(`${name} is already in contact`)
-      : this.setState(({ contacts }) => ({
-          contacts: [contact, ...contacts],
-        }));
-  };
-
-  changeFilterInput = (event) => {
-    this.setState({ filter: event.target.value });
-  };
-
-  findContacts = () => {
-    const { filter, contacts } = this.state;
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
-
-  deleteContact = (id) => {
-    this.setState((prevState) => ({
-      contacts: prevState.contacts.filter((contact) => contact.id !== id),
-    }));
+  handleFormSubmit = (inputValue) => {
+    this.setState({ inputValue });
   };
 
   render() {
     return (
-      <AppContainer>
-        <H1>Phonebook</H1>
-        <Phonebook onSubmit={this.formSubmitHandler} />
+      <div className="App">
+        <SearchBar onSubmit={this.handleFormSubmit} />
+        <ImageGallery inputValue={this.state.inputValue}/>
 
-        <H2>Contacts</H2>
-        <SearchInput
-          filter={this.state.filter}
-          changeFilterInput={this.changeFilterInput}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={true}
+          theme="colored"
         />
-
-        <ContactList
-          contacts={this.findContacts()}
-          deleteContact={this.deleteContact}
-        />
-      </AppContainer>
+      </div>
     );
   }
 }
