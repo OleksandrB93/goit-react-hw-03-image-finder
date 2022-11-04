@@ -1,15 +1,18 @@
 import React from "react";
+import MyLoader from "components/Loader/Loader";
 
-export default function ImageGalleryItem({ images }) {
-  console.log(images);
-
-  return images.map((image) => (
+export default function ImageGalleryItem({ images, isLoading }) {
+  return images.hits.map((image) => (
     <li className="ImageGalleryItem" key={image.id}>
-      <img
-        className="ImageGalleryItem-image"
-        src={image.webformatURL}
-        alt="image"
-      />
+      {isLoading ? (
+        <MyLoader />
+      ) : (
+        <img
+          className="ImageGalleryItem-image"
+          src={image.webformatURL}
+          alt="image"
+        />
+      )}
     </li>
   ));
 }
