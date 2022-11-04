@@ -7,7 +7,7 @@ function fetchImages(name) {
   return fetch(url).then((response) => {
     if (response.ok) {
       return response.json();
-    }
+    } 
 
     return Promise.reject(new Error(`Whoops, something went wrong: ${name}`));
   });

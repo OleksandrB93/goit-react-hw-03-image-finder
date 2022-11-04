@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ImageGalleryItem from "components/ImageGalleryItem/ImageGalleryItem";
 import ImageError from "components/ImageError/ImageError";
+import Notification from "components/Notification/Notification";
 import API from "components/api/api";
 
 export default class ImageGallery extends Component {
@@ -19,7 +20,9 @@ export default class ImageGallery extends Component {
       this.setState({ isLoading: true });
 
       API.fetchImages(newName)
-        .then((images) => this.setState({ images, status: "resolved" }))
+        .then((images) => {
+          this.setState({ images, status: "resolved" });
+        })
         .catch((error) => this.setState({ error, status: "rejected" }))
         .finally(() => this.setState({ isLoading: false }));
     }
@@ -27,12 +30,17 @@ export default class ImageGallery extends Component {
 
   render() {
     const { images, error, isLoading, status } = this.state;
+    console.log(images.totalHits);
     if (status === "idle") {
       return <h1>Please, enter your request</h1>;
     }
 
     if (status === "rejected") {
       return <ImageError message={error.message} />;
+    }
+
+    if (images.totalHits === 0) {
+      return <Notification notification="No images were found" />;
     }
 
     if (status === "resolved") {

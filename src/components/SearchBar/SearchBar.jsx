@@ -32,6 +32,7 @@ export default class SearchBar extends Component {
             name="inputValue"
             value={this.state.inputValue}
             onChange={this.handleNameChange}
+            placeholder="Search images and photos"
           />
           <button className="SearchForm-button" type="submit">
                 <FaSearch size='2em'/>

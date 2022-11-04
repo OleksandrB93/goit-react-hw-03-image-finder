@@ -123,6 +123,7 @@ svg {
 .SearchForm-input::placeholder {
   font: inherit;
   font-size: 18px;
+  padding-left: 10px;
 }
 
 /*
@@ -235,3 +236,7 @@ svg {
   background-color: #303f9f;
 }
 
+h1{
+  text-align: center;
+  color: gray;
+}
