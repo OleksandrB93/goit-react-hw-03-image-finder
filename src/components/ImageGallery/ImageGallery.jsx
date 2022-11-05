@@ -3,6 +3,7 @@ import ImageGalleryItem from "components/ImageGalleryItem/ImageGalleryItem";
 import ImageError from "components/ImageError/ImageError";
 import Notification from "components/Notification/Notification";
 import API from "components/api/api";
+import ButtonLoadMore from "components/ButtonLoadMore/ButtonLoadMore";
 
 export default class ImageGallery extends Component {
   state = {
@@ -12,16 +13,25 @@ export default class ImageGallery extends Component {
     error: null,
     status: "idle",
     isLoading: false,
+    loadBtnIsShown: false,
+  };
+
+  loadMore = () => {
+    this.setState((prevState) => ({
+      page: prevState.page + 1,
+    }));
   };
 
   async componentDidUpdate(prevProps, prevState) {
     const prevName = prevProps.inputValue;
     const newName = this.props.inputValue;
+    const prevPage = prevState.page;
+    const nextPage = this.state.page;
 
-    if (prevName !== newName) {
-      this.setState({ isLoading: true });
+    if (prevPage !== nextPage || prevName !== newName) {
+      this.setState({ isLoading: true, loadBtnIsShown: false });
 
-      API.fetchImages(newName)
+      API.fetchImages(newName, nextPage)
         .then((images) => {
           this.setState({ images, status: "resolved" });
         })
@@ -46,9 +56,12 @@ export default class ImageGallery extends Component {
 
     if (status === "resolved") {
       return (
-        <ul className="ImageGallery">
-          <ImageGalleryItem images={images} isLoading={isLoading} />
-        </ul>
+        <div>
+          <ul className="ImageGallery">
+            <ImageGalleryItem images={images} isLoading={isLoading} />
+          </ul>
+          <ButtonLoadMore onClick={this.loadMore} images={images} />
+        </div>
       );
     }
   }
