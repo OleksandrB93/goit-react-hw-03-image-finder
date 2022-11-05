@@ -3,6 +3,7 @@ import ContentLoader from "react-content-loader"
 
 const MyLoader = (props) => (
   <ContentLoader 
+  className="ImageGalleryItem  "
     speed={0.75}
     width={360}
     height={260}

@@ -6,6 +6,8 @@ import API from "components/api/api";
 
 export default class ImageGallery extends Component {
   state = {
+    query: "",
+    page: 1,
     images: [],
     error: null,
     status: "idle",
@@ -30,7 +32,6 @@ export default class ImageGallery extends Component {
 
   render() {
     const { images, error, isLoading, status } = this.state;
-    console.log(images.totalHits);
     if (status === "idle") {
       return <h1>Please, enter your request</h1>;
     }

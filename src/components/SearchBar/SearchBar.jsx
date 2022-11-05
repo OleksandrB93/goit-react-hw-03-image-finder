@@ -16,8 +16,8 @@ export default class SearchBar extends Component {
     if (this.state.inputValue.trim() === "") {
       return toast.warning("Write something");
     }
-
     this.props.onSubmit(this.state.inputValue);
+
 
     this.setState({ inputValue: "" });
   };
@@ -35,7 +35,7 @@ export default class SearchBar extends Component {
             placeholder="Search images and photos"
           />
           <button className="SearchForm-button" type="submit">
-                <FaSearch size='2em'/>
+            <FaSearch size="2em" />
           </button>
         </form>
       </div>
