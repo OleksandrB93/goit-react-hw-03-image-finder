@@ -47,6 +47,7 @@ svg {
  * Стили компонента Searchbar
  */
 .Searchbar {
+  width: 100vw;
   top: 0;
   left: 0;
   position: sticky;
@@ -118,11 +119,12 @@ svg {
   outline: none;
   padding-left: 4px;
   padding-right: 4px;
+  margin: 0 15px;
 }
 
 .SearchForm-input::placeholder {
   font: inherit;
-  font-size: 18px;
+  font-size: 20px;
   padding-left: 10px;
 }
 
@@ -131,7 +133,7 @@ svg {
  */
 /* .ImageGallery {
   display: grid;
-  width: calc(100vw - 48px);
+  max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 16px;
   margin-top: 0;
@@ -145,10 +147,11 @@ svg {
 .ImageGallery {
   display: flex;
   justify-content: center;
-  width: calc(100vw - 48px);
   flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
   grid-gap: 16px;
-  margin-top: 0;
+  margin-top: 30px;
   margin-bottom: 0;
   padding: 0;
   list-style: none;
@@ -159,10 +162,15 @@ svg {
 /*
  * Стили компонента ImageGalleryItem
  */
-.ImageGalleryItem {  
-  border-radius: 3px;
+.ImageGalleryItem {
+  border-radius: 5px;
+  background-color: #d7d5d5;
+  width: 360px;
+  height: 260px;
+
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
   box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0px 4px 7px 1px rgb(103, 103, 103);
 }
 
 .ImageGalleryItem:hover {
@@ -171,7 +179,6 @@ svg {
 
 .ImageGalleryItem-image {
   border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 15px 25px, rgba(0, 0, 0, 0.1) 0px 10px 10px;
 
   width: 362px;
   height: 260px;
@@ -179,10 +186,8 @@ svg {
 }
 
 .ImageGalleryItem-image:hover {
-  /* transform: scale(1.03); */
+  transform: scale(1.03);
   cursor: zoom-in;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 15px 25px, rgba(0, 0, 0, 0.1) 0px 10px 10px;
-
 }
 
 /*
@@ -211,12 +216,15 @@ svg {
 * Стили компонента Buton (Load more)
 */
 .Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px auto;
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  display: inline-block;
   color: #fff;
   border: 0;
   text-decoration: none;
@@ -236,8 +244,15 @@ svg {
   background-color: #303f9f;
 }
 
-h1{
+h1 {
   text-align: center;
   color: gray;
   margin-top: 300px;
+}
+
+.tags {
+  width: 100%;
+  background-color: #3f51b5;
+  color: white;
+  text-align: center;
 }

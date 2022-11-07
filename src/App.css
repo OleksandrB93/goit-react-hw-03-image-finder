@@ -7,6 +7,19 @@ body {
   justify-content: center;
   min-width: 400px;
   margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+  grid-gap: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1,

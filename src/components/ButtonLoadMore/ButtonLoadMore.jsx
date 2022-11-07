@@ -5,7 +5,7 @@ export default function ButtonLoadMore({ onClick, images }) {
   return (
     <div>
       {images.hits.length >= 12 && (
-        <button type="submit" onClick={onClick}>
+        <button className="Button" type="submit" onClick={onClick}>
           load more
         </button>
       )}
