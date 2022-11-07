@@ -1,5 +1,4 @@
 
-import MyLoader from "components/Loader/Loader";
 import Modal from "components/Modal/Modal";
 import React, { Component } from "react";
 
@@ -14,21 +13,17 @@ export default class ImageGalleryItem extends Component {
     }));
   };
   render() {
-    const { smallImage, largeImage, tags, isLoading, id } = this.props;
+    const { smallImage, largeImage, tags, isLoading } = this.props;
     const { modalIsOpen } = this.state;
 
     return (
       <>
-        <li className="ImageGalleryItem" key={id} onClick={this.toggleModal}>
-          {isLoading ? (
-            <MyLoader />
-          ) : (
+        <li className="ImageGalleryItem" onClick={this.toggleModal}>
             <img
               className="ImageGalleryItem-image"
               src={smallImage}
               alt={tags}
             />
-          )}
         </li>
         {modalIsOpen && (
           <Modal closeModal={this.toggleModal}>
