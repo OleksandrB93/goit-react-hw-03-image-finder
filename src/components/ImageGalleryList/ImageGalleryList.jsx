@@ -5,7 +5,7 @@ import React from "react";
 export default function ImageGalleryList({ images, isLoading }) {
   return (
     <ul className="ImageGallery">
-      {images.hits.map((hit) => (
+      {images.map((hit) => (
         <ImageGalleryItem
           key={hit.id}
           smallImage={hit.webformatURL}

@@ -1,8 +1,8 @@
 // import axios from "axios";
 import { API_KEY, BASE_URL } from "components/Constants/Constants";
 
+const perPage=12;
 function fetchImages(name, page = 1) {
-  const perPage=12;
   const url = `${BASE_URL}/?key=${API_KEY}&q=${name}
   &image_type=photo&orientation=horizontal&&page=${page}
   &per_page=${perPage}`;
@@ -16,6 +16,6 @@ function fetchImages(name, page = 1) {
   });
 }
 
-const api = { fetchImages };
+const api = { fetchImages, perPage };
 
 export default api;

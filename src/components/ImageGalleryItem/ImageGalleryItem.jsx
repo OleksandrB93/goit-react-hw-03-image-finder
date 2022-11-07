@@ -1,20 +1,3 @@
-// import React from "react";
-
-// export default function ImageGalleryItem({ images, isLoading }) {
-//   return images.hits.map((hit) => (
-//     <li className="ImageGalleryItem" key={hit.id}>
-//       {isLoading ? (
-//         <MyLoader />
-//       ) : (
-//         <img
-//           className="ImageGalleryItem-image"
-//           src={hit.webformatURL}
-//           alt={hit.tags}
-//         />
-//       )}
-//     </li>
-//   ));
-// }
 
 import MyLoader from "components/Loader/Loader";
 import Modal from "components/Modal/Modal";

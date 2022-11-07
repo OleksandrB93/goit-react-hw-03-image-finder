@@ -9,7 +9,6 @@ import API from "components/api/api";
 import ButtonLoadMore from "components/ButtonLoadMore/ButtonLoadMore";
 import ImageGalleryList from "components/ImageGalleryList/ImageGalleryList";
 import SearchBar from "components/SearchBar/SearchBar";
-// import ImageGallery from "components/ImageGallery/ImageGallery";
 
 export default class App extends Component {
   state = {
@@ -20,10 +19,11 @@ export default class App extends Component {
     error: null,
     status: "idle",
     isLoading: true,
+    // loadBtnIsShown:false
   };
 
   handleFormSubmit = (inputValue) => {
-    this.setState({ inputValue });
+    this.setState({ inputValue, images: [], page: 1 });
   };
 
   loadMore = () => {
@@ -38,15 +38,13 @@ export default class App extends Component {
     const prevPage = prevState.page;
     const nextPage = this.state.page;
 
-
     if (prevPage !== nextPage || prevName !== newName) {
       this.setState({ isLoading: true });
 
       API.fetchImages(newName, nextPage)
         .then((images) => {
-          console.log(images)
           this.setState({
-            images,
+            images: [...prevState.images, ...images.hits],
             status: "resolved",
           });
         })
