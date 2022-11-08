@@ -14,7 +14,6 @@ import SearchBar from "components/SearchBar/SearchBar";
 export default class App extends Component {
   state = {
     inputValue: "",
-    query: "",
     page: 1,
     images: [],
     error: null,
@@ -46,14 +45,11 @@ export default class App extends Component {
 
       try {
         const images = await API.fetchImages(newName, nextPage);
-        if (images.totalHits === 0) {
-          throw new Error(
-            "There are no images found for your request. Please, try again"
-          );
-        }
+
         const remainingPages = this.getRemainingPages(images.totalHits);
         if (remainingPages > 0) this.setState({ loadBtnIsShown: true });
-        // console.log(images.totalHits);
+
+        if (images.hits.length === 0) return this.setState({ status: "empty" });
 
         this.setState((prevState) => ({
           images: [...prevState.images, ...images.hits],
@@ -64,20 +60,6 @@ export default class App extends Component {
         this.setState({ error });
       }
     }
-    //   API.fetchImages(newName, nextPage)
-    //     .then((images) => {
-    //       this.setState((prevState) => ({
-    //         images: [...prevState.images, ...images.hits],
-    //         status: "resolved",
-    //         totalResalts: images.totalHits,
-    //       }));
-    //     })
-    //     .catch((error) => this.setState({ error, status: "rejected" }))
-    //     .finally(() => this.setState({ isLoading: false }));
-
-    //   const remainingPages = this.getRemainingPages(totalImages);
-    //   if (remainingPages > 0) this.setState({ loadBtnIsShown: true });
-    // }
   }
 
   getRemainingPages = (totalImages) => {
@@ -97,11 +79,7 @@ export default class App extends Component {
           theme="colored"
         />
 
-        {status === "idle" && <h1>Please, enter your request</h1>}
-
-        {status === "rejected" && <ImageError message={error.message} />}
-
-        {this.state.totalResalts === 0 && (
+        {status === "empty" && (
           <Notification
             notification={
               "There are no images found for your request. Please try again"
@@ -109,10 +87,12 @@ export default class App extends Component {
           />
         )}
 
+        {status === "idle" && <h1>Please, enter your request</h1>}
+
+        {status === "rejected" && <ImageError message={error.message} />}
+
         {status === "resolved" && (
-          <div>
-            <ImageGalleryList images={images} isLoading={isLoading} />
-          </div>
+          <ImageGalleryList images={images} isLoading={isLoading} />
         )}
         {loadBtnIsShown && <ButtonLoadMore onClick={this.loadMore} />}
       </div>
