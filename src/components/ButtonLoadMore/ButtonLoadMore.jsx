@@ -1,14 +1,14 @@
 import React from "react";
 
-export default function ButtonLoadMore({ onClick, images }) {
 
+export default function ButtonLoadMore({ onClick }) {
   return (
     <div>
-      {images.length >= 12 && (
+
         <button className="Button" type="submit" onClick={onClick}>
           load more
         </button>
-      )}
+
     </div>
   );
 }
