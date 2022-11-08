@@ -11,13 +11,6 @@ import ButtonLoadMore from "components/ButtonLoadMore/ButtonLoadMore";
 import ImageGalleryList from "components/ImageGalleryList/ImageGalleryList";
 import SearchBar from "components/SearchBar/SearchBar";
 
-const STATUS = {
-  idle: "idle",
-  pending: "pending",
-  resolved: "resolved",
-  rejected: "rejected",
-};
-
 export default class App extends Component {
   state = {
     inputValue: "",
@@ -60,7 +53,7 @@ export default class App extends Component {
         }
         const remainingPages = this.getRemainingPages(images.totalHits);
         if (remainingPages > 0) this.setState({ loadBtnIsShown: true });
-        console.log(images.totalHits);
+        // console.log(images.totalHits);
 
         this.setState((prevState) => ({
           images: [...prevState.images, ...images.hits],
